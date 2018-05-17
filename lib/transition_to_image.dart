@@ -79,11 +79,12 @@ class _TransitionToImageState extends State<TransitionToImage>
     if (_fadeTween == null) _fadeTween = new Tween(begin: 0.0, end: 1.0);
     if (_slideTween == null)
       _slideTween = new Tween(begin: const Offset(0.0, -1.0), end: Offset.zero);
-    _reloadListeners.forEach((listener) {
+    for (int i = 0; i < _reloadListeners.length; i++) {
+      var listener = _reloadListeners[i];
       if (listener.keys.first == _imageProvider.hashCode.toString()) {
         _reloadListeners.remove(listener);
       }
-    });
+    }
     _reloadListeners.add({
       _imageProvider.hashCode.toString(): () {
         if (_loadFailed) {
